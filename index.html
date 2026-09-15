@@ -8,15 +8,16 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f0f11;
-      color: #e4e4e7;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
       min-height: 100vh;
     }
 
     header {
-      padding: 20px 16px 16px;
-      border-bottom: 1px solid #1e1e24;
+      background: #ffffff;
+      padding: 18px 16px;
+      border-bottom: 1px solid #e2e8f0;
     }
 
     .header-inner {
@@ -30,62 +31,64 @@
     .logo-mark {
       width: 36px;
       height: 36px;
-      background: linear-gradient(135deg, #818cf8, #c084fc);
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
     }
 
     .header-text h1 {
       font-size: 15px;
       font-weight: 700;
-      color: #f4f4f5;
+      color: #0f172a;
       letter-spacing: -0.2px;
     }
 
     .header-text p {
       font-size: 11px;
-      color: #71717a;
+      color: #64748b;
       margin-top: 1px;
     }
 
     .main {
       max-width: 560px;
       margin: 0 auto;
-      padding: 14px 16px 80px;
+      padding: 16px 16px 80px;
     }
 
     /* Breadcrumb */
     .breadcrumb {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       flex-wrap: wrap;
       margin-bottom: 14px;
       font-size: 12px;
     }
 
     .breadcrumb .crumb {
-      color: #818cf8;
+      color: #4f46e5;
       cursor: pointer;
       font-weight: 600;
     }
 
     .breadcrumb .crumb:hover { text-decoration: underline; }
-    .breadcrumb .sep { color: #3f3f46; }
-    .breadcrumb .current { color: #a1a1aa; }
+    .breadcrumb .sep { color: #cbd5e1; }
+    .breadcrumb .current { color: #64748b; }
 
     /* Preview */
     .preview-box {
-      background: #18181b;
-      border: 1px solid #27272a;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 14px;
       display: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
     .preview-box img {
@@ -93,19 +96,19 @@
       border-radius: 8px;
       max-height: 200px;
       object-fit: contain;
-      background: #09090b;
+      background: #f1f5f9;
     }
 
     .preview-url {
       margin-top: 10px;
-      background: #09090b;
+      background: #f8fafc;
       border-radius: 8px;
       padding: 8px 10px;
       font-size: 11px;
-      color: #71717a;
+      color: #475569;
       word-break: break-all;
       line-height: 1.5;
-      border: 1px solid #27272a;
+      border: 1px solid #e2e8f0;
     }
 
     .preview-actions {
@@ -116,8 +119,8 @@
 
     .btn-copy-main {
       flex: 1;
-      background: #818cf8;
-      color: white;
+      background: #4f46e5;
+      color: #ffffff;
       border: none;
       border-radius: 8px;
       padding: 10px;
@@ -127,33 +130,37 @@
       transition: background 0.15s;
     }
 
-    .btn-copy-main:active { background: #6366f1; }
-    .btn-copy-main.copied { background: #22c55e; }
+    .btn-copy-main:active { background: #4338ca; }
+    .btn-copy-main.copied { background: #16a34a; }
 
     .btn-close {
-      background: #27272a;
-      color: #a1a1aa;
-      border: none;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 10px 14px;
       font-size: 13px;
       cursor: pointer;
     }
 
+    .btn-close:hover { background: #e2e8f0; }
+
     /* File list */
     .item {
-      background: #18181b;
-      border: 1px solid #27272a;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 10px;
       padding: 11px 14px;
       margin-bottom: 7px;
       display: flex;
       align-items: center;
       gap: 10px;
-      transition: border-color 0.15s;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
-    .item:active { border-color: #818cf8; }
+    .item:hover { border-color: #cbd5e1; }
+    .item:active { border-color: #6366f1; }
 
     .item-left {
       flex: 1;
@@ -168,28 +175,18 @@
 
     .item-name {
       font-size: 13px;
-      color: #d4d4d8;
+      color: #334155;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .item-name.folder { font-weight: 600; color: #f4f4f5; }
-
-    .badge {
-      font-size: 10px;
-      background: #27272a;
-      color: #71717a;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 4px;
-      flex-shrink: 0;
-    }
+    .item-name.folder { font-weight: 600; color: #0f172a; }
 
     .btn-copy {
-      background: #27272a;
-      color: #818cf8;
-      border: none;
+      background: #f1f5f9;
+      color: #4f46e5;
+      border: 1px solid #e2e8f0;
       border-radius: 7px;
       padding: 6px 11px;
       font-size: 12px;
@@ -197,14 +194,23 @@
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
-      transition: background 0.15s;
+      transition: all 0.15s;
     }
 
-    .btn-copy.copied { background: #14532d; color: #22c55e; }
+    .btn-copy:hover {
+      background: #e0e7ff;
+      border-color: #c7d2fe;
+    }
+
+    .btn-copy.copied {
+      background: #dcfce7;
+      border-color: #bbf7d0;
+      color: #15803d;
+    }
 
     .back-item {
-      background: #18181b;
-      border: 1px dashed #27272a;
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
       border-radius: 10px;
       padding: 10px 14px;
       margin-bottom: 7px;
@@ -212,13 +218,14 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      color: #52525b;
+      color: #64748b;
       font-size: 13px;
+      font-weight: 500;
     }
 
-    .back-item:active { border-color: #52525b; }
+    .back-item:hover { background: #f8fafc; border-color: #94a3b8; }
 
-    .empty { text-align: center; padding: 40px; color: #3f3f46; font-size: 13px; }
+    .empty { text-align: center; padding: 40px; color: #94a3b8; font-size: 13px; }
 
     /* Share bar */
     .share-bar {
@@ -226,12 +233,13 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: #18181b;
-      border-top: 1px solid #27272a;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
       padding: 10px 16px;
       display: flex;
       gap: 8px;
       align-items: center;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.03);
     }
 
     .share-bar-inner {
@@ -246,9 +254,9 @@
     .share-url {
       flex: 1;
       font-size: 11px;
-      color: #52525b;
-      background: #09090b;
-      border: 1px solid #27272a;
+      color: #64748b;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: 7px;
       padding: 8px 10px;
       white-space: nowrap;
@@ -257,9 +265,9 @@
     }
 
     .btn-share {
-      background: #27272a;
-      color: #a1a1aa;
-      border: none;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #e2e8f0;
       border-radius: 7px;
       padding: 8px 12px;
       font-size: 12px;
@@ -268,7 +276,8 @@
       white-space: nowrap;
     }
 
-    .btn-share.copied { color: #22c55e; }
+    .btn-share:hover { background: #e2e8f0; }
+    .btn-share.copied { background: #dcfce7; border-color: #bbf7d0; color: #15803d; }
   </style>
 </head>
 <body>
@@ -316,7 +325,12 @@
   let previewPath = "";
 
   function isImg(n) { return IMGS.some(e => n.toLowerCase().endsWith("." + e)); }
-  function cdnUrl(p) { return CDN + "/" + p; }
+
+  // Encodes each path segment individually so slashes stay intact while spaces become %20
+  function cdnUrl(p) {
+    const encodedSegments = p.split("/").map(seg => encodeURIComponent(seg)).join("/");
+    return CDN + "/" + encodedSegments;
+  }
 
   async function loadPath(path) {
     currentPath = path;
@@ -325,7 +339,7 @@
     renderBreadcrumb();
     document.getElementById("file-list").innerHTML = '<div class="empty">Loading…</div>';
     try {
-      const r = await fetch(path ? API + "/" + path : API);
+      const r = await fetch(path ? API + "/" + encodeURI(path) : API);
       if (!r.ok) throw new Error();
       const data = await r.json();
       data.sort((a, b) => {
@@ -342,10 +356,13 @@
     const parts = currentPath ? currentPath.split("/") : [];
     let h = '<span class="crumb" onclick="loadPath(\'\')">mediahub</span>';
     parts.forEach((p, i) => {
-      const pp = parts.slice(0, i+1).join("/");
+      const pp = parts.slice(0, i + 1).join("/");
       h += '<span class="sep">/</span>';
-      if (i === parts.length - 1) h += '<span class="current">' + p + '</span>';
-      else h += '<span class="crumb" onclick="loadPath(\'' + pp + '\')">' + p + '</span>';
+      if (i === parts.length - 1) {
+        h += '<span class="current">' + p + '</span>';
+      } else {
+        h += '<span class="crumb" onclick="loadPath(\'' + pp.replace(/'/g, "\\'") + '\')">' + p + '</span>';
+      }
     });
     document.getElementById("breadcrumb").innerHTML = h;
   }
@@ -353,18 +370,22 @@
   function renderList(items) {
     let h = "";
     if (currentPath) {
-      const up = currentPath.includes("/") ? currentPath.split("/").slice(0,-1).join("/") : "";
-      h += '<div class="back-item" onclick="loadPath(\'' + up + '\')"><span>↑</span><span>Back</span></div>';
+      const up = currentPath.includes("/") ? currentPath.split("/").slice(0, -1).join("/") : "";
+      h += '<div class="back-item" onclick="loadPath(\'' + up.replace(/'/g, "\\'") + '\')"><span>↑</span><span>Back</span></div>';
     }
-    if (!items.length) { document.getElementById("file-list").innerHTML = '<div class="empty">No files here.</div>'; return; }
+    if (!items.length) {
+      document.getElementById("file-list").innerHTML = '<div class="empty">No files here.</div>';
+      return;
+    }
     items.forEach(item => {
       const safeId = "btn_" + item.path.replace(/[^a-zA-Z0-9]/g, "_");
+      const safePath = item.path.replace(/'/g, "\\'");
       if (item.type === "dir") {
-        h += '<div class="item"><div class="item-left" onclick="loadPath(\'' + item.path + '\')"><span class="item-icon">📂</span><span class="item-name folder">' + item.name + '</span></div></div>';
+        h += '<div class="item"><div class="item-left" onclick="loadPath(\'' + safePath + '\')"><span class="item-icon">📂</span><span class="item-name folder">' + item.name + '</span></div></div>';
       } else {
         const icon = isImg(item.name) ? "🖼️" : "📄";
-        const click = isImg(item.name) ? 'showPreview("' + item.path + '")' : '';
-        h += '<div class="item"><div class="item-left" onclick=\'' + click + '\'><span class="item-icon">' + icon + '</span><span class="item-name">' + item.name + '</span></div><button class="btn-copy" id="' + safeId + '" onclick="copyUrl(\'' + item.path + '\',\'' + safeId + '\')">Copy</button></div>';
+        const click = isImg(item.name) ? 'showPreview(\'' + safePath + '\')' : '';
+        h += '<div class="item"><div class="item-left" onclick="' + click + '"><span class="item-icon">' + icon + '</span><span class="item-name">' + item.name + '</span></div><button class="btn-copy" id="' + safeId + '" onclick="copyUrl(\'' + safePath + '\',\'' + safeId + '\')">Copy</button></div>';
       }
     });
     document.getElementById("file-list").innerHTML = h;
@@ -377,7 +398,8 @@
     document.getElementById("preview-url").textContent = url;
     document.getElementById("preview-box").style.display = "block";
     const b = document.getElementById("btn-copy-main");
-    b.textContent = "Copy URL"; b.className = "btn-copy-main";
+    b.textContent = "Copy URL"; 
+    b.className = "btn-copy-main";
   }
 
   function closePreview() {
@@ -388,7 +410,8 @@
   function copyMain() {
     navigator.clipboard.writeText(cdnUrl(previewPath)).then(() => {
       const b = document.getElementById("btn-copy-main");
-      b.textContent = "✓ Copied!"; b.className = "btn-copy-main copied";
+      b.textContent = "✓ Copied!"; 
+      b.className = "btn-copy-main copied";
       setTimeout(() => { b.textContent = "Copy URL"; b.className = "btn-copy-main"; }, 2000);
     });
   }
@@ -396,12 +419,16 @@
   function copyUrl(path, id) {
     navigator.clipboard.writeText(cdnUrl(path)).then(() => {
       const b = document.getElementById(id);
-      if (b) { b.textContent = "✓"; b.className = "btn-copy copied"; setTimeout(() => { b.textContent = "Copy"; b.className = "btn-copy"; }, 2000); }
+      if (b) { 
+        b.textContent = "✓"; 
+        b.className = "btn-copy copied"; 
+        setTimeout(() => { b.textContent = "Copy"; b.className = "btn-copy"; }, 2000); 
+      }
     });
   }
 
   function updateShareBar() {
-    const url = currentPath ? PAGE_URL + "?path=" + currentPath : PAGE_URL;
+    const url = currentPath ? PAGE_URL + "?path=" + encodeURIComponent(currentPath) : PAGE_URL;
     document.getElementById("share-url").textContent = url;
   }
 
@@ -409,7 +436,8 @@
     const url = document.getElementById("share-url").textContent;
     navigator.clipboard.writeText(url).then(() => {
       const b = document.getElementById("btn-share");
-      b.textContent = "✓ Copied"; b.className = "btn-share copied";
+      b.textContent = "✓ Copied"; 
+      b.className = "btn-share copied";
       setTimeout(() => { b.textContent = "Share"; b.className = "btn-share"; }, 2000);
     });
   }
