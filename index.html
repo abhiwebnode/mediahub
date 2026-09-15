@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediaHub — abhiwebnode</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f11;
+      color: #e4e4e7;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px 16px 16px;
+      border-bottom: 1px solid #1e1e24;
+    }
+
+    .header-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #818cf8, #c084fc);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f4f4f5;
+      letter-spacing: -0.2px;
+    }
+
+    .header-text p {
+      font-size: 11px;
+      color: #71717a;
+      margin-top: 1px;
+    }
+
+    .main {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 14px 16px 80px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      font-size: 12px;
+    }
+
+    .breadcrumb .crumb {
+      color: #818cf8;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .breadcrumb .crumb:hover { text-decoration: underline; }
+    .breadcrumb .sep { color: #3f3f46; }
+    .breadcrumb .current { color: #a1a1aa; }
+
+    /* Preview */
+    .preview-box {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .preview-box img {
+      width: 100%;
+      border-radius: 8px;
+      max-height: 200px;
+      object-fit: contain;
+      background: #09090b;
+    }
+
+    .preview-url {
+      margin-top: 10px;
+      background: #09090b;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11px;
+      color: #71717a;
+      word-break: break-all;
+      line-height: 1.5;
+      border: 1px solid #27272a;
+    }
+
+    .preview-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-copy-main {
+      flex: 1;
+      background: #818cf8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-copy-main:active { background: #6366f1; }
+    .btn-copy-main.copied { background: #22c55e; }
+
+    .btn-close {
+      background: #27272a;
+      color: #a1a1aa;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* File list */
+    .item {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 10px;
+      padding: 11px 14px;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.15s;
+    }
+
+    .item:active { border-color: #818cf8; }
+
+    .item-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      min-width: 0;
+    }
+
+    .item-icon { font-size: 18px; flex-shrink: 0; }
+
+    .item-name {
+      font-size: 13px;
+      color: #d4d4d8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .item-name.folder { font-weight: 600; color: #f4f4f5; }
+
+    .badge {
+      font-size: 10px;
+      background: #27272a;
+      color: #71717a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      flex-shrink: 0;
+    }
+
+    .btn-copy {
+      background: #27272a;
+      color: #818cf8;
+      border: none;
+      border-radius: 7px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .btn-copy.copied { background: #14532d; color: #22c55e; }
+
+    .back-item {
+      background: #18181b;
+      border: 1px dashed #27272a;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: #52525b;
+      font-size: 13px;
+    }
+
+    .back-item:active { border-color: #52525b; }
+
+    .empty { text-align: center; padding: 40px; color: #3f3f46; font-size: 13px; }
+
+    /* Share bar */
+    .share-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #18181b;
+      border-top: 1px solid #27272a;
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .share-bar-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .share-url {
+      flex: 1;
+      font-size: 11px;
+      color: #52525b;
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 7px;
+      padding: 8px 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-share {
+      background: #27272a;
+      color: #a1a1aa;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-share.copied { color: #22c55e; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">📁</div>
+    <div class="header-text">
+      <h1>MediaHub</h1>
+      <p>abhiwebnode/mediahub · GitHub CDN</p>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="breadcrumb" id="breadcrumb"></div>
+
+  <div class="preview-box" id="preview-box">
+    <img id="preview-img" src="" alt="" />
+    <div class="preview-url" id="preview-url"></div>
+    <div class="preview-actions">
+      <button class="btn-copy-main" id="btn-copy-main" onclick="copyMain()">Copy URL</button>
+      <button class="btn-close" onclick="closePreview()">✕ Close</button>
+    </div>
+  </div>
+
+  <div id="file-list"><div class="empty">Loading…</div></div>
+</div>
+
+<div class="share-bar">
+  <div class="share-bar-inner">
+    <div class="share-url" id="share-url">https://abhiwebnode.github.io/mediahub/</div>
+    <button class="btn-share" id="btn-share" onclick="copyShareUrl()">Share</button>
+  </div>
+</div>
+
+<script>
+  const REPO = "abhiwebnode/mediahub";
+  const CDN  = "https://cdn.jsdelivr.net/gh/" + REPO;
+  const API  = "https://api.github.com/repos/" + REPO + "/contents";
+  const IMGS = ["png","jpg","jpeg","gif","webp","svg","ico"];
+  const PAGE_URL = "https://abhiwebnode.github.io/mediahub/";
+
+  let currentPath = "";
+  let previewPath = "";
+
+  function isImg(n) { return IMGS.some(e => n.toLowerCase().endsWith("." + e)); }
+  function cdnUrl(p) { return CDN + "/" + p; }
+
+  async function loadPath(path) {
+    currentPath = path;
+    closePreview();
+    updateShareBar();
+    renderBreadcrumb();
+    document.getElementById("file-list").innerHTML = '<div class="empty">Loading…</div>';
+    try {
+      const r = await fetch(path ? API + "/" + path : API);
+      if (!r.ok) throw new Error();
+      const data = await r.json();
+      data.sort((a, b) => {
+        if (a.type === b.type) return a.name.localeCompare(b.name);
+        return a.type === "dir" ? -1 : 1;
+      });
+      renderList(data);
+    } catch {
+      document.getElementById("file-list").innerHTML = '<div class="empty">Could not load — check connection.</div>';
+    }
+  }
+
+  function renderBreadcrumb() {
+    const parts = currentPath ? currentPath.split("/") : [];
+    let h = '<span class="crumb" onclick="loadPath(\'\')">mediahub</span>';
+    parts.forEach((p, i) => {
+      const pp = parts.slice(0, i+1).join("/");
+      h += '<span class="sep">/</span>';
+      if (i === parts.length - 1) h += '<span class="current">' + p + '</span>';
+      else h += '<span class="crumb" onclick="loadPath(\'' + pp + '\')">' + p + '</span>';
+    });
+    document.getElementById("breadcrumb").innerHTML = h;
+  }
+
+  function renderList(items) {
+    let h = "";
+    if (currentPath) {
+      const up = currentPath.includes("/") ? currentPath.split("/").slice(0,-1).join("/") : "";
+      h += '<div class="back-item" onclick="loadPath(\'' + up + '\')"><span>↑</span><span>Back</span></div>';
+    }
+    if (!items.length) { document.getElementById("file-list").innerHTML = '<div class="empty">No files here.</div>'; return; }
+    items.forEach(item => {
+      const safeId = "btn_" + item.path.replace(/[^a-zA-Z0-9]/g, "_");
+      if (item.type === "dir") {
+        h += '<div class="item"><div class="item-left" onclick="loadPath(\'' + item.path + '\')"><span class="item-icon">📂</span><span class="item-name folder">' + item.name + '</span></div></div>';
+      } else {
+        const icon = isImg(item.name) ? "🖼️" : "📄";
+        const click = isImg(item.name) ? 'showPreview("' + item.path + '")' : '';
+        h += '<div class="item"><div class="item-left" onclick=\'' + click + '\'><span class="item-icon">' + icon + '</span><span class="item-name">' + item.name + '</span></div><button class="btn-copy" id="' + safeId + '" onclick="copyUrl(\'' + item.path + '\',\'' + safeId + '\')">Copy</button></div>';
+      }
+    });
+    document.getElementById("file-list").innerHTML = h;
+  }
+
+  function showPreview(path) {
+    previewPath = path;
+    const url = cdnUrl(path);
+    document.getElementById("preview-img").src = url;
+    document.getElementById("preview-url").textContent = url;
+    document.getElementById("preview-box").style.display = "block";
+    const b = document.getElementById("btn-copy-main");
+    b.textContent = "Copy URL"; b.className = "btn-copy-main";
+  }
+
+  function closePreview() {
+    document.getElementById("preview-box").style.display = "none";
+    previewPath = "";
+  }
+
+  function copyMain() {
+    navigator.clipboard.writeText(cdnUrl(previewPath)).then(() => {
+      const b = document.getElementById("btn-copy-main");
+      b.textContent = "✓ Copied!"; b.className = "btn-copy-main copied";
+      setTimeout(() => { b.textContent = "Copy URL"; b.className = "btn-copy-main"; }, 2000);
+    });
+  }
+
+  function copyUrl(path, id) {
+    navigator.clipboard.writeText(cdnUrl(path)).then(() => {
+      const b = document.getElementById(id);
+      if (b) { b.textContent = "✓"; b.className = "btn-copy copied"; setTimeout(() => { b.textContent = "Copy"; b.className = "btn-copy"; }, 2000); }
+    });
+  }
+
+  function updateShareBar() {
+    const url = currentPath ? PAGE_URL + "?path=" + currentPath : PAGE_URL;
+    document.getElementById("share-url").textContent = url;
+  }
+
+  function copyShareUrl() {
+    const url = document.getElementById("share-url").textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      const b = document.getElementById("btn-share");
+      b.textContent = "✓ Copied"; b.className = "btn-share copied";
+      setTimeout(() => { b.textContent = "Share"; b.className = "btn-share"; }, 2000);
+    });
+  }
+
+  loadPath("");
+</script>
+</body>
+</html>
